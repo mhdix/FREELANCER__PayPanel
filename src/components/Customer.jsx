@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { customers } from "../assets/data";
 import { LiaInstagram, LiaSocksSolid, LiaTelegramPlane } from "react-icons/lia";
-import { TfiGallery } from "react-icons/tfi";
-import { LuBookImage } from "react-icons/lu";
-import { IoMdImage, IoMdImages } from "react-icons/io";
+import { IoMdImages } from "react-icons/io";
 
 function Customer() {
   const [copied, setCopied] = useState({
@@ -15,20 +13,14 @@ function Customer() {
     telegram: false,
     instagram: false,
     bale: false,
-    number: false,
+    phoneNumber: false,
   });
   const location = useLocation();
   const findCustomer = customers.filter(
-    (customer) => customer.name == location.pathname.split("/")[1],
+    (customer) => customer.url == location.pathname.split("/")[1],
   );
+  console.log(findCustomer);
 
-  console.log(findCustomer[0].cardSheba);
-
-
-
-  
-  
-  
   const resetCopy = () => {
     setCopied({
       cardNom: false,
@@ -36,204 +28,183 @@ function Customer() {
       telegram: false,
       instagram: false,
       bale: false,
-      number: false,
+      phoneNumber: false,
     });
   };
+
+  const copyText = async (text, key) => {
+    try {
+      await navigator.clipboard.writeText(text);
+
+      setCopied({
+        [key]: true,
+      });
+
+      setTimeout(resetCopy, 2000);
+    } catch (error) {
+      console.log("copyText error: ", error);
+    }
+  };
+
   const copyHandler = async (value) => {
     switch (value) {
       case "telegram":
-        await navigator.clipboard.writeText(findCustomer[0].telegram);
-        setCopied({
-          telegram: true,
-        });
-
-        setTimeout(() => {
-          setCopied({
-            cardNom: false,
-            cardSheba: false,
-            telegram: false,
-            instagram: false,
-            bale: false,
-            number: false,
-          });
-        }, 2000);
-
+        await copyText(findCustomer[0].telegram, "telegram");
         break;
+
       case "instagram":
-        try {
-          await navigator.clipboard.writeText(findCustomer[0].instagram);
-          console.log("copied");
-        } catch (err) {
-          console.error(err);
-        }
-        setCopied({
-          instagram: true,
-        });
-        setTimeout(() => {
-          setCopied({
-            cardNom: false,
-            cardSheba: false,
-            telegram: false,
-            instagram: false,
-            bale: false,
-            number: false,
-          });
-        }, 2000);
-
+        await copyText(findCustomer[0].instagram, "instagram");
         break;
+
       case "cardNom":
-        await navigator.clipboard.writeText(findCustomer[0].cardNom);
-        setCopied({
-          cardNom: true,
-        });
-        setTimeout(() => {
-          setCopied({
-            cardNom: false,
-            cardSheba: false,
-            telegram: false,
-            instagram: false,
-            bale: false,
-            number: false,
-          });
-        }, 2000);
-
+        await copyText(findCustomer[0].cardNom, "cardNom");
         break;
-      case "sheba":
-        await navigator.clipboard.writeText(findCustomer[0].cardSheba);
-        setCopied({
-          sheba: true,
-        });
-        setTimeout(() => {
-          setCopied({
-            cardNom: false,
-            cardSheba: false,
-            telegram: false,
-            instagram: false,
-            bale: false,
-            number: false,
-          });
-        }, 2000);
 
+      case "cardSheba":
+        await copyText(findCustomer[0].cardSheba, "cardSheba");
         break;
+
       case "bale":
-        await navigator.clipboard.writeText(findCustomer[0].bale);
-        setCopied({
-          bale: true,
-        });
-        setTimeout(() => {
-          setCopied({
-            cardNom: false,
-            cardSheba: false,
-            telegram: false,
-            instagram: false,
-            bale: false,
-            number: false,
-          });
-        }, 2000);
+        await copyText(findCustomer[0].bale, "bale");
+        break;
+
+      case "phoneNumber":
+        await copyText(findCustomer[0].phoneNumber, "phoneNumber");
         break;
       default:
-        setTimeout(() => {
-          setCopied({
-            cardNom: false,
-            cardSheba: false,
-            telegram: false,
-            instagram: false,
-            bale: false,
-            number: false,
-          });
-        }, 2000);
         break;
     }
   };
 
   return (
-    <>
-      <div className="relative flex -mt-14">
-        <div className="relative border border-gray-200 p-1.5 mb-4 rounded-lg h-20 w-20 flex justify-center items-center  shadow-md">
-          {findCustomer[0].brand.split("/").length > 1 ? (
-            <img src={findCustomer[0].brand} alt="" />
-          ) : (
-            <p className="text-black text-xs">{findCustomer[0].brand}</p>
-          )}
-          {/* <div className="">{findCustomer[0].brand}</div> */}
+    <div className="h-full bg-linear-to-b from-slate-100 via-white to-slate-50 flex items-center justify-center p-4 text-right">
+      <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden">
+        {/* Header */}
+        <div className="bg-linear-to-r from-slate-900 to-slate-700 text-white p-2.5 px-6">
+          <h2 className="text-2xl font-bold tracking-tight">
+            {findCustomer[0]?.name}
+          </h2>
+
+          <p className="text-sm text-slate-300 mt-1">
+            {findCustomer[0]?.brand}
+          </p>
         </div>
-      </div>
 
-      <div className="card">
-        <div className="username">{findCustomer[0]?.name}</div>
-
+        {/* Card Section */}
         <div
-          className={`number-box mb-4 ${copied.cardNom && "bg-green-50 border-green-500"}`}
+          className={`mx-4 mt-4 p-5 rounded-2xl border transition-all duration-300 ${copied.cardNom || copied.cardSheba ? "bg-green-50 border-green-500" : "bg-slate-50 border-slate-200"}
+        `}
         >
-          <div className={`number`} id="cardNumber">
-            <p className="text-end text-sm">{findCustomer[0].cardName}</p>
-
-            <p className="text-gray-500  mt-4 text-end mb-0.5 text-sm">
-              شماره کارت
-            </p>
-            <p>{findCustomer[0]?.cardNom.match(/.{1,4}/g).join(" ")}</p>
-            <p className="text-gray-500  mt-4 text-end mb-0.5 text-sm">
-              شماره شبا
+          <p className="mb-4 font-bold text-lg">آزاده صدیق کفشچین</p>
+          <div>
+            <p className="text-xs text-gray-500 mb-1">شماره کارت</p>
+            <p className="font-mono tracking-widest text-lg">
+              {findCustomer[0]?.cardNom.match(/.{1,4}/g).join(" ")}
             </p>
 
-            <p>{findCustomer[0]?.cardSheba.match(/.{1,4}/g).join(" ")}</p>
+            {findCustomer[0]?.cardSheba && (
+              <>
+                <p className="text-xs text-gray-500 mt-4 mb-1">شماره شبا</p>
+                <p className="font-mono tracking-widest text-lg">
+                  {findCustomer[0]?.cardSheba.match(/.{1,4}/g).join(" ")}
+                </p>
+              </>
+            )}
           </div>
-          <div className="grid grid-cols-2 place-items-center justify-between w-full">
-            <p className="col-span-full text-gray-500 w-full text-end mb-0.5">
-              کپی
-            </p>
+
+          {/* Buttons */}
+          <div className="grid grid-cols-2 gap-3 mt-5">
             <button
-              className={`copy-btn text-nowrap w-24 ${copied.cardNom && "bg-green-500"}`}
-              onClick={() => copyHandler("cartNo")}
+              className={`
+              h-11 rounded-xl font-medium transition-all duration-300
+              ${
+                copied.cardNom
+                  ? "bg-green-500 text-white"
+                  : "bg-slate-900 text-white hover:bg-slate-700"
+              }
+            `}
+              onClick={() => copyHandler("cardNom")}
             >
-              {copied.cardNom ? "کپی شد" : "شماره کارت"}
+              {copied.cardNom ? "✓ کپی شد" : "شماره کارت"}
             </button>
+
             <button
-              className={`copy-btn  text-nowrap w-24 ${copied.sheba && "bg-green-500"}`}
-              onClick={() => copyHandler("cartShj")}
+              className={`
+              h-11 rounded-xl font-medium transition-all duration-300
+              ${
+                copied.cardSheba
+                  ? "bg-green-500 text-white"
+                  : "bg-slate-200 hover:bg-slate-300"
+              }
+            `}
+              onClick={() => copyHandler("cardSheba")}
             >
-              {copied.cardNom ? "کپی شد" : "شبا"}
+              {copied.cardSheba ? "✓ کپی شد" : "شبا"}
             </button>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 items-center text-sm gap-2 px-2">
+        {/* Links Section */}
+        <div className="p-4 grid grid-cols-2 gap-3">
+          {/* Gallery */}
           <Link
-            to={`gallery`}
-            className={`grid grid-cols-2 items-center hover:scale-105 duration-300 active:text-red-500 text-start`}
+            to="gallery"
+            className="flex items-center justify-center gap-2 h-10 rounded-2xl border border-gray-200 hover:shadow-md hover:-translate-y-0.5 transition"
           >
-            <IoMdImages size={30} className="justify-self-center" />
-            <span className="text-xs cursor-pointer">Gallery</span>
+            <span className="text-sm">گالری</span>
+            <IoMdImages size={22} />
           </Link>
+
+          {/* Bale */}
           <button
-            className={`grid grid-cols-2 items-center hover:scale-105 duration-300 active:text-red-500 ${copied.bale && "text-green-700"} text-start cursor-pointer`}
             onClick={() => copyHandler("bale")}
+            className={`
+            flex items-center justify-center gap-2 h-10 rounded-2xl border transition
+            ${
+              copied.bale
+                ? "bg-green-50 border-green-500 text-green-700"
+                : "border-gray-200 hover:shadow-md hover:-translate-y-0.5"
+            }
+          `}
           >
-            <img
-              src="/icons/bale.png"
-              className="w-6 justify-self-center"
-              alt=""
-            />
-            <span className="text-xs cursor-pointer">Bale</span>
+            <span className="text-sm">بله</span>
+            <img src="/icons/bale.png" className="w-5" />
           </button>
-          <div className="border-b col-span-full"></div>
+
+          {/* Telegram */}
           <button
-            className={`grid grid-cols-2 items-center hover:scale-105 duration-300 active:text-red-500 ${copied.telegram && "text-green-700"} text-start cursor-pointer`}
             onClick={() => copyHandler("telegram")}
+            className={`
+            flex items-center justify-center gap-2 h-10 rounded-2xl border transition
+            ${
+              copied.telegram
+                ? "bg-green-50 border-green-500 text-green-700"
+                : "border-gray-200 hover:shadow-md hover:-translate-y-0.5"
+            }
+          `}
           >
-            <LiaTelegramPlane size={30} className="justify-self-center" />
-            <span className="text-xs cursor-pointer">Telegram</span>
+            <span className="text-sm">تلگرام</span>
+            <LiaTelegramPlane size={22} />
           </button>
+
+          {/* Insgram */}
           <button
-            className={`grid grid-cols-2 items-center hover:scale-105 duration-300 active:text-red-500 ${copied.instagram && "text-green-700"} text-start cursor-pointer`}
             onClick={() => copyHandler("instagram")}
+            className={`
+            flex items-center justify-center gap-2 h-10 rounded-2xl border transition
+            ${
+              copied.instagram
+                ? "bg-green-50 border-green-500 text-green-700"
+                : "border-gray-200 hover:shadow-md hover:-translate-y-0.5"
+            }
+          `}
           >
-            <LiaInstagram size={30} className="justify-self-center" />
-            <span className="text-xs cursor-pointer">Instagram</span>
+            <span className="text-sm">اینستاگرام</span>
+            <LiaInstagram size={22} />
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
