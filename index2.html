@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Card Info</title>
+
+  </head>
+  <body style="display: flex; flex-direction: column; height: 100vh">
+    <div class="card">
+      <!-- <div class="name">name</div> -->
+      <div class="username">name</div>
+
+      <div class="number-box">
+        <div class="number" id="cardNumber">1234 5678 9012 3456</div>
+
+        <button class="copy-btn" onclick="copyNumber(this)">copy</button>
+      </div>
+    </div>
+
+    <footer
+      style="
+        border-top: 1px solid #9c9c9c;
+        padding: 10px;
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+      "
+    >
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          color: #34455c;
+        "
+      >
+        <p
+          style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 14px;
+          "
+        >
+          09111111111
+        </p>
+        <p>Reserve pay panel</p>
+      </div>
+    </footer>
+
+    <script>
+      function copyNumber(button) {
+        const text = document
+          .getElementById("cardNumber")
+          .innerText.replace(/\s/g, "");
+
+        navigator.clipboard.writeText(text);
+
+        button.innerText = "copy success";
+        button.classList.add("copied");
+
+        setTimeout(() => {
+          button.innerText = "copy";
+          button.classList.remove("copied");
+        }, 2000);
+      }
+    </script>
+  </body>
+</html>

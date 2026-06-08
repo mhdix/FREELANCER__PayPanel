@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme {
+  --font-vazir: "Vazir", sans-serif;
+}
+
+@font-face {
+  font-family: "Vazir";
+  src:
+    url("./assets/font/Vazir-Medium.woff2") format("woff2"),
+    url("./assets/font/Vazir-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@layer base {
+  body {
+    font-family: "Vazir", sans-serif;
+    @apply h-screen bg-[#f5f7fa] flex justify-center items-center min-h-screen p-5;
+  }
+  input {
+    @apply border border-gray-500 p-1 focus:border-blue-400 focus:outline-0 rounded-md text-sm;
+  }
+}
+
+@layer components {
+  .card {
+    @apply w-80 bg-white rounded-[22px] p-6 shadow-[0_10px_30px_rgba(0,0,0,0.08)] text-center ;
+  }
+
+  .name {
+    @apply text-[15px] text-[#666] mb-2.5;
+  }
+
+  .username {
+    @apply text-2xl font-bold text-[#1f2937] mb-5;
+  }
+
+  .number-box {
+    @apply flex flex-col items-center justify-between gap-3 bg-[#f8fafc] border border-[#e5e7eb] rounded-[14px] p-3.5;
+  }
+
+  .number {
+    @apply text-lg font-semibold text-[#111827] tracking-[1px];
+    direction: ltr;
+  }
+
+  .copy-btn {
+    @apply border-none bg-[#111827] text-white py-2.5 px-4 rounded-[10px] cursor-pointer text-sm transition-all duration-200 w-full;
+  }
+
+  .copy-btn:active {
+    @apply scale-95;
+  }
+
+  .copy-btn.copied {
+    @apply bg-[#16a34a];
+  }
+}
