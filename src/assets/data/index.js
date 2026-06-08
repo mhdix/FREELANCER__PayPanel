@@ -18,9 +18,12 @@ export let customers = [
     brand: "taxi calling",
   },
   {
-    name: "tahora salon",
+    name: "tahora_salon",
     plan: 3,
+    gender: "fmale",
+    cardName: "آزاده صدیق",
     cardNom: "6219861989738504",
+    cardSheba: "154684356546848613588354",
     instagram: "ccc.instagram",
     telegram: "ccc.telegram",
     bale: "ccc.bale",

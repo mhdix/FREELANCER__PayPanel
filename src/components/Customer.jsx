@@ -3,19 +3,42 @@ import { Link, useLocation } from "react-router-dom";
 import { customers } from "../assets/data";
 import { LiaInstagram, LiaSocksSolid, LiaTelegramPlane } from "react-icons/lia";
 import { TfiGallery } from "react-icons/tfi";
+import { LuBookImage } from "react-icons/lu";
+import { IoMdImage, IoMdImages } from "react-icons/io";
 
 function Customer() {
   const [copied, setCopied] = useState({
-    number: false,
-    instagram: false,
+    // card
+    cardNom: false,
+    cardSheba: false,
+    // social
     telegram: false,
+    instagram: false,
     bale: false,
+    number: false,
   });
   const location = useLocation();
   const findCustomer = customers.filter(
     (customer) => customer.name == location.pathname.split("/")[1],
   );
 
+  console.log(findCustomer[0].cardSheba);
+
+
+
+  
+  
+  
+  const resetCopy = () => {
+    setCopied({
+      cardNom: false,
+      cardSheba: false,
+      telegram: false,
+      instagram: false,
+      bale: false,
+      number: false,
+    });
+  };
   const copyHandler = async (value) => {
     switch (value) {
       case "telegram":
@@ -26,6 +49,8 @@ function Customer() {
 
         setTimeout(() => {
           setCopied({
+            cardNom: false,
+            cardSheba: false,
             telegram: false,
             instagram: false,
             bale: false,
@@ -46,6 +71,8 @@ function Customer() {
         });
         setTimeout(() => {
           setCopied({
+            cardNom: false,
+            cardSheba: false,
             telegram: false,
             instagram: false,
             bale: false,
@@ -54,13 +81,15 @@ function Customer() {
         }, 2000);
 
         break;
-      case "number":
+      case "cardNom":
         await navigator.clipboard.writeText(findCustomer[0].cardNom);
         setCopied({
-          number: true,
+          cardNom: true,
         });
         setTimeout(() => {
           setCopied({
+            cardNom: false,
+            cardSheba: false,
             telegram: false,
             instagram: false,
             bale: false,
@@ -69,7 +98,23 @@ function Customer() {
         }, 2000);
 
         break;
+      case "sheba":
+        await navigator.clipboard.writeText(findCustomer[0].cardSheba);
+        setCopied({
+          sheba: true,
+        });
+        setTimeout(() => {
+          setCopied({
+            cardNom: false,
+            cardSheba: false,
+            telegram: false,
+            instagram: false,
+            bale: false,
+            number: false,
+          });
+        }, 2000);
 
+        break;
       case "bale":
         await navigator.clipboard.writeText(findCustomer[0].bale);
         setCopied({
@@ -77,6 +122,8 @@ function Customer() {
         });
         setTimeout(() => {
           setCopied({
+            cardNom: false,
+            cardSheba: false,
             telegram: false,
             instagram: false,
             bale: false,
@@ -87,6 +134,8 @@ function Customer() {
       default:
         setTimeout(() => {
           setCopied({
+            cardNom: false,
+            cardSheba: false,
             telegram: false,
             instagram: false,
             bale: false,
@@ -109,23 +158,43 @@ function Customer() {
           {/* <div className="">{findCustomer[0].brand}</div> */}
         </div>
       </div>
-      
+
       <div className="card">
         <div className="username">{findCustomer[0]?.name}</div>
 
         <div
-          className={`number-box mb-4 ${copied.number && "bg-green-50 border-green-500"}`}
+          className={`number-box mb-4 ${copied.cardNom && "bg-green-50 border-green-500"}`}
         >
-          <div className={`number `} id="cardNumber">
-            {findCustomer[0]?.cardNom.match(/.{1,4}/g).join(" ")}
-          </div>
+          <div className={`number`} id="cardNumber">
+            <p className="text-end text-sm">{findCustomer[0].cardName}</p>
 
-          <button
-            className={`copy-btn ${copied.number && "bg-green-500"}`}
-            onClick={() => copyHandler("number")}
-          >
-            {copied.number ? "Copy success" : "Copy"}
-          </button>
+            <p className="text-gray-500  mt-4 text-end mb-0.5 text-sm">
+              شماره کارت
+            </p>
+            <p>{findCustomer[0]?.cardNom.match(/.{1,4}/g).join(" ")}</p>
+            <p className="text-gray-500  mt-4 text-end mb-0.5 text-sm">
+              شماره شبا
+            </p>
+
+            <p>{findCustomer[0]?.cardSheba.match(/.{1,4}/g).join(" ")}</p>
+          </div>
+          <div className="grid grid-cols-2 place-items-center justify-between w-full">
+            <p className="col-span-full text-gray-500 w-full text-end mb-0.5">
+              کپی
+            </p>
+            <button
+              className={`copy-btn text-nowrap w-24 ${copied.cardNom && "bg-green-500"}`}
+              onClick={() => copyHandler("cartNo")}
+            >
+              {copied.cardNom ? "کپی شد" : "شماره کارت"}
+            </button>
+            <button
+              className={`copy-btn  text-nowrap w-24 ${copied.sheba && "bg-green-500"}`}
+              onClick={() => copyHandler("cartShj")}
+            >
+              {copied.cardNom ? "کپی شد" : "شبا"}
+            </button>
+          </div>
         </div>
 
         <div className="grid grid-cols-2 items-center text-sm gap-2 px-2">
@@ -133,7 +202,7 @@ function Customer() {
             to={`gallery`}
             className={`grid grid-cols-2 items-center hover:scale-105 duration-300 active:text-red-500 text-start`}
           >
-            <TfiGallery size={25} className="justify-self-center" />
+            <IoMdImages size={30} className="justify-self-center" />
             <span className="text-xs cursor-pointer">Gallery</span>
           </Link>
           <button
