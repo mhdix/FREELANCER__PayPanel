@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { customers } from "../assets/data";
+import { customers } from "../data";
 import { LiaInstagram, LiaSocksSolid, LiaTelegramPlane } from "react-icons/lia";
 import { IoMdImages } from "react-icons/io";
 
@@ -44,34 +44,37 @@ function Customer() {
 
       setTimeout(resetCopy, 2000);
     } catch (error) {
-      console.log("copyText error: ", error);
+      console.log("clipboard failed", error);
     }
   };
 
   const copyHandler = async (value) => {
+    console.log(findCustomer[0]);
+    const { telegram, instagram, cardNom, cardSheba, bale, phoneNumber } =
+      findCustomer[0];
     switch (value) {
       case "telegram":
-        await copyText(findCustomer[0].telegram, "telegram");
+        await copyText(telegram, "telegram");
         break;
 
       case "instagram":
-        await copyText(findCustomer[0].instagram, "instagram");
+        await copyText(instagram, "instagram");
         break;
 
       case "cardNom":
-        await copyText(findCustomer[0].cardNom, "cardNom");
+        await copyText(cardNom, "cardNom");
         break;
 
       case "cardSheba":
-        await copyText(findCustomer[0].cardSheba, "cardSheba");
+        await copyText(cardSheba, "cardSheba");
         break;
 
       case "bale":
-        await copyText(findCustomer[0].bale, "bale");
+        await copyText(bale, "bale");
         break;
 
       case "phoneNumber":
-        await copyText(findCustomer[0].phoneNumber, "phoneNumber");
+        await copyText(findCustomer[0]?.phoneNumber, "phoneNumber");
         break;
       default:
         break;
@@ -166,22 +169,22 @@ function Customer() {
             </button>
           </div>
         </div>
-        <p className="text-center">آدرس : {findCustomer[0].address}</p>
+        <p className="px-4 text-center">آدرس : {findCustomer[0].address}</p>
 
         {/* Links Section */}
         {findCustomer[0].plan === 2 && (
           <div className="p-4 grid grid-cols-2 gap-3">
             {/* Gallery */}
-            {/* <Link
+            <Link
               to="gallery"
               className="flex items-center justify-center gap-2 h-10 rounded-2xl border border-gray-200 hover:shadow-md hover:-translate-y-0.5 transition"
             >
               <span className="text-sm">گالری</span>
               <IoMdImages size={22} />
-            </Link> */}
+            </Link>
 
             {/* Bale */}
-            {/* <button
+            <button
               onClick={() => copyHandler("bale")}
               className={`
             flex items-center justify-center gap-2 h-10 rounded-2xl border transition
@@ -194,7 +197,7 @@ function Customer() {
             >
               <span className="text-sm">بله</span>
               <img src="/icons/bale.png" className="w-5" />
-            </button> */}
+            </button>
 
             {/* Telegram */}
             {findCustomer[0].telegram && (
