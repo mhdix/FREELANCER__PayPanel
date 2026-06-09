@@ -10,6 +10,7 @@ function Customer() {
     cardNom: false,
     cardSheba: false,
     // social
+    phoneNumber: false,
     telegram: false,
     instagram: false,
     bale: false,
@@ -25,6 +26,7 @@ function Customer() {
     setCopied({
       cardNom: false,
       cardSheba: false,
+      phoneNumber: false,
       telegram: false,
       instagram: false,
       bale: false,
@@ -77,7 +79,7 @@ function Customer() {
   };
 
   return (
-    <div className="h-full bg-linear-to-b from-slate-100 via-white to-slate-50 flex items-center justify-center p-4 text-right">
+    <div className="h-full flex items-center justify-center p-4 text-right">
       <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden">
         {/* Header */}
         <div className="bg-linear-to-r from-slate-900 to-slate-700 text-white p-2.5 px-6">
@@ -92,7 +94,7 @@ function Customer() {
 
         {/* Card Section */}
         <div
-          className={`mx-4 mt-4 p-5 rounded-2xl border transition-all duration-300 ${copied.cardNom || copied.cardSheba ? "bg-green-50 border-green-500" : "bg-slate-50 border-slate-200"}
+          className={`mx-4 mt-4 p-5 mb-4 rounded-2xl border transition-all duration-300 ${copied.cardNom || copied.cardSheba ? "bg-green-50 border-green-500" : "bg-slate-50 border-slate-200"}
         `}
         >
           <p className="mb-4 font-bold text-lg">آزاده صدیق کفشچین</p>
@@ -110,6 +112,14 @@ function Customer() {
                 </p>
               </>
             )}
+            {findCustomer[0]?.cardSheba && (
+              <>
+                <p className="text-xs text-gray-500 mt-4 mb-1">شماره موبایل</p>
+                <p className="font-mono tracking-widest text-lg">
+                  {findCustomer[0]?.phoneNumber}
+                </p>
+              </>
+            )}
           </div>
 
           {/* Buttons */}
@@ -118,9 +128,9 @@ function Customer() {
               className={`
               h-11 rounded-xl font-medium transition-all duration-300
               ${
-                copied.cardNom
+                copied.cardSheba
                   ? "bg-green-500 text-white"
-                  : "bg-slate-900 text-white hover:bg-slate-700"
+                  : "bg-slate-200 hover:bg-slate-300"
               }
             `}
               onClick={() => copyHandler("cardNom")}
@@ -141,24 +151,39 @@ function Customer() {
             >
               {copied.cardSheba ? "✓ کپی شد" : "شبا"}
             </button>
+            <button
+              className={`
+              h-11 col-span-full rounded-xl font-medium transition-all duration-300
+              ${
+                copied.phoneNumber
+                  ? "bg-green-500 text-white"
+                  : "bg-slate-900 text-white hover:bg-slate-700"
+              }
+            `}
+              onClick={() => copyHandler("phoneNumber")}
+            >
+              {copied.phoneNumber ? "✓ کپی شد" : "شماره موبایل"}
+            </button>
           </div>
         </div>
+        <p className="text-center">آدرس : {findCustomer[0].address}</p>
 
         {/* Links Section */}
-        <div className="p-4 grid grid-cols-2 gap-3">
-          {/* Gallery */}
-          <Link
-            to="gallery"
-            className="flex items-center justify-center gap-2 h-10 rounded-2xl border border-gray-200 hover:shadow-md hover:-translate-y-0.5 transition"
-          >
-            <span className="text-sm">گالری</span>
-            <IoMdImages size={22} />
-          </Link>
+        {findCustomer[0].plan === 2 && (
+          <div className="p-4 grid grid-cols-2 gap-3">
+            {/* Gallery */}
+            {/* <Link
+              to="gallery"
+              className="flex items-center justify-center gap-2 h-10 rounded-2xl border border-gray-200 hover:shadow-md hover:-translate-y-0.5 transition"
+            >
+              <span className="text-sm">گالری</span>
+              <IoMdImages size={22} />
+            </Link> */}
 
-          {/* Bale */}
-          <button
-            onClick={() => copyHandler("bale")}
-            className={`
+            {/* Bale */}
+            {/* <button
+              onClick={() => copyHandler("bale")}
+              className={`
             flex items-center justify-center gap-2 h-10 rounded-2xl border transition
             ${
               copied.bale
@@ -166,15 +191,16 @@ function Customer() {
                 : "border-gray-200 hover:shadow-md hover:-translate-y-0.5"
             }
           `}
-          >
-            <span className="text-sm">بله</span>
-            <img src="/icons/bale.png" className="w-5" />
-          </button>
+            >
+              <span className="text-sm">بله</span>
+              <img src="/icons/bale.png" className="w-5" />
+            </button> */}
 
-          {/* Telegram */}
-          <button
-            onClick={() => copyHandler("telegram")}
-            className={`
+            {/* Telegram */}
+            {findCustomer[0].telegram && (
+              <button
+                onClick={() => copyHandler("telegram")}
+                className={`
             flex items-center justify-center gap-2 h-10 rounded-2xl border transition
             ${
               copied.telegram
@@ -182,27 +208,30 @@ function Customer() {
                 : "border-gray-200 hover:shadow-md hover:-translate-y-0.5"
             }
           `}
-          >
-            <span className="text-sm">تلگرام</span>
-            <LiaTelegramPlane size={22} />
-          </button>
-
-          {/* Insgram */}
-          <button
-            onClick={() => copyHandler("instagram")}
-            className={`
-            flex items-center justify-center gap-2 h-10 rounded-2xl border transition
-            ${
-              copied.instagram
-                ? "bg-green-50 border-green-500 text-green-700"
-                : "border-gray-200 hover:shadow-md hover:-translate-y-0.5"
-            }
-          `}
-          >
-            <span className="text-sm">اینستاگرام</span>
-            <LiaInstagram size={22} />
-          </button>
-        </div>
+              >
+                <span className="text-sm">تلگرام</span>
+                <LiaTelegramPlane size={22} />
+              </button>
+            )}
+            {/* Insgram */}
+            {findCustomer[0].instagram && (
+              <button
+                onClick={() => copyHandler("instagram")}
+                className={`
+              flex items-center justify-center gap-2 h-10 rounded-2xl border transition
+              ${
+                copied.instagram
+                  ? "bg-green-50 border-green-500 text-green-700"
+                  : "border-gray-200 hover:shadow-md hover:-translate-y-0.5"
+              }
+                `}
+              >
+                <span className="text-sm">اینستاگرام</span>
+                <LiaInstagram size={22} />
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
