@@ -16,7 +16,7 @@
 @layer base {
   body {
     font-family: "Vazir", sans-serif;
-    @apply h-screen bg-[#f5f7fa] flex justify-center items-center min-h-screen p-5;
+    @apply bg-[#f5f7fa] flex justify-center items-center min-h-screen p-5;
   }
   input {
     @apply border border-gray-500 p-1 focus:border-blue-400 focus:outline-0 rounded-md text-sm;

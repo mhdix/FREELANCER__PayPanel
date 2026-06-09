@@ -8,12 +8,13 @@ const Gallery = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const findCustomer = customers.filter(
-    (customer) => customer.name == location.pathname.split("/")[1],
+    (customer) => customer.url == location.pathname.split("/")[1],
   );
+  console.log(location);
   return (
     <>
-      <div className="relative flex -mt-14">
-        <div className="relative border border-gray-200 p-1.5 mb-4 rounded-lg h-20 w-20 flex justify-center items-center  shadow-md">
+      <div className="relative flex">
+        <div className="relative border border-gray-200 p-1.5 mb- rounded-lg h-20 w-20 flex justify-center items-center  shadow-md">
           {findCustomer[0].brand.split("/").length > 1 ? (
             <img src={findCustomer[0].brand} alt="" />
           ) : (
