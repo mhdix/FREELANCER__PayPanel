@@ -131,7 +131,7 @@ function Customer() {
               className={`
               h-11 rounded-xl font-medium transition-all duration-300
               ${
-                copied.cardSheba
+                copied.cardNom
                   ? "bg-green-500 text-white"
                   : "bg-slate-200 hover:bg-slate-300"
               }
