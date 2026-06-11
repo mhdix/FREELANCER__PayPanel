@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { customers } from "../assets/data";
 import { inputs } from "./forms/formConfig";
 import axios from "axios";
+import { customers } from "../data";
 
 const AddCustomer = () => {
   const [allCustomers, setAllCustomers] = useState(customers);

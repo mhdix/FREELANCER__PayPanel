@@ -53,6 +53,7 @@ function Customer() {
   const {
     telegram,
     instagram,
+    cardName,
     cardNom,
     cardSheba,
     bale,
@@ -109,17 +110,24 @@ function Customer() {
           className={`mx-4 mt-4 p-5 mb-4 rounded-2xl border transition-all duration-300 ${copied.cardNom || copied.cardSheba ? "bg-green-50 border-green-500" : "bg-slate-50 border-slate-200"}
         `}
         >
-          <p className="mb-4 font-bold text-lg">آزاده صدیق کفشچین</p>
+          <p className="mb-4 font-bold text-lg">{cardName}</p>
           <div>
             <p className="text-xs text-gray-500 mb-1">شماره کارت</p>
-            <p className="font-mono tracking-widest text-lg">
+            <p
+              // className="font-mono tracking-widest text-md"
+              className={`font-mono tracking-widest text-md ${copied.cardNom && "text-green-500"}`}
+              onClick={() => copyHandler("cardNom")}
+            >
               {cardNom.match(/.{1,4}/g).join(" ")}
             </p>
 
             {cardSheba && (
               <>
                 <p className="text-xs text-gray-500 mt-4 mb-1">شماره شبا</p>
-                <p className="font-mono tracking-widest text-lg">
+                <p
+                  className={`font-mono tracking-widest text-md ${copied.cardSheba && "text-green-500"}`}
+                  onClick={() => copyHandler("cardSheba")}
+                >
                   {cardSheba.match(/.{1,4}/g).join(" ")}
                 </p>
               </>
@@ -127,9 +135,12 @@ function Customer() {
             {cardSheba && (
               <>
                 <p className="text-xs text-gray-500 mt-4 mb-1">شماره موبایل</p>
-                <p className="font-mono tracking-widest text-lg">
+                <a
+                  href={`tel:${phoneNumber}`}
+                  className="font-mono tracking-widest text-lg"
+                >
                   {phoneNumber}
-                </p>
+                </a>
               </>
             )}
           </div>
@@ -163,9 +174,9 @@ function Customer() {
             >
               {copied.cardSheba ? "✓ کپی شد" : "شبا"}
             </button>
-            <button
+            <a
               className={`
-              h-11 col-span-full rounded-xl font-medium transition-all duration-300
+              h-11 col-span-full rounded-xl font-medium transition-all duration-300 flex justify-center items-center
               ${
                 copied.phoneNumber
                   ? "bg-green-500 text-white"
@@ -173,9 +184,10 @@ function Customer() {
               }
             `}
               onClick={() => copyHandler("phoneNumber")}
+              href={`tel:${phoneNumber}`}
             >
               {copied.phoneNumber ? "✓ کپی شد" : "شماره موبایل"}
-            </button>
+            </a>
           </div>
         </div>
         <p className="px-4 text-center">آدرس : {findCustomer.address}</p>
