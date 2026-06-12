@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { customers } from "../data/index";
-import { LiaInstagram, LiaSocksSolid, LiaTelegramPlane } from "react-icons/lia";
+import {
+  LiaInstagram,
+  LiaMapPinSolid,
+  LiaSocksSolid,
+  LiaTelegramPlane,
+} from "react-icons/lia";
 import { IoMdImages } from "react-icons/io";
 
 function Customer() {
@@ -19,6 +24,7 @@ function Customer() {
   const { url } = useParams();
 
   const findCustomer = customers.find((customer) => customer.url === url);
+  const index = findCustomer.length;
 
   console.log(findCustomer);
 
@@ -226,6 +232,11 @@ function Customer() {
                 onClick={() => copyHandler("telegram")}
                 className={`
             flex items-center justify-center gap-2 h-10 rounded-2xl border transition
+             ${
+               index === items.length - 1 && items.length % 2 !== 0
+                 ? "col-span-2"
+                 : ""
+             }
             ${
               copied.telegram
                 ? "bg-green-50 border-green-500 text-green-700"
@@ -243,6 +254,11 @@ function Customer() {
                 onClick={() => copyHandler("instagram")}
                 className={`
               flex items-center justify-center gap-2 h-10 rounded-2xl border transition
+               ${
+                 index === items.length - 1 && items.length % 2 !== 0
+                   ? "col-span-2"
+                   : ""
+               }
               ${
                 copied.instagram
                   ? "bg-green-50 border-green-500 text-green-700"
@@ -254,6 +270,27 @@ function Customer() {
                 <LiaInstagram size={22} />
               </button>
             )}
+
+            <button
+              onClick={() => copyHandler("instagram")}
+              className={`
+              flex items-center justify-center gap-2 h-10 rounded-2xl border transition 
+              ${
+                index === findCustomer.length - 1 &&
+                findCustomer.length % 2 !== 0
+                  ? "col-span-2"
+                  : ""
+              }
+              ${
+                copied.instagram
+                  ? "bg-green-50 border-green-500 text-green-700"
+                  : "border-gray-200 hover:shadow-md hover:-translate-y-0.5"
+              }
+                `}
+            >
+              <span className="text-sm">لوکیشن</span>
+              <LiaMapPinSolid size={22} />
+            </button>
           </div>
         )}
       </div>

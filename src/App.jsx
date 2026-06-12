@@ -3,10 +3,12 @@ import { Route, Routes } from "react-router-dom";
 import Customer from "./components/Customer";
 import AddCustomer from "./components/AddCustomer";
 import Gallery from "./components/Gallery";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <div className="w-full flex flex-col items-center space-y-14 min-h-screen relative">
+      <Navbar />
       <Routes>
         <Route path="/admin" element={<AddCustomer />} />
 
@@ -23,7 +25,7 @@ function App() {
           >
             09925438078
           </a>
-          <p>رزرو کوئیک‌کارت</p>
+          <p>رزرو نیپ‌کارت</p>
         </div>
       </footer>
     </div>

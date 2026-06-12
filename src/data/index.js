@@ -13,6 +13,7 @@ export let customers = [
     // telegram: "ccc.telegram",
     bale: "0912245873",
     brand: "caffe",
+    neshan: "https://nshn.ir/_bv_w2Oxpz2x",
   },
   {
     url: "perfect_code",
