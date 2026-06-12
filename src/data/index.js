@@ -1,3 +1,29 @@
+// url: "golha",
+//   name: "golha",
+//   plan: 2,
+//   gender: "male",
+//   cardName: "محمدنظری",
+//   cardNom: "6104648568343256",
+//   cardSheba: "457812400000002295917910",
+//   phoneNumber: "0912245873",
+//   address: "تهران - بلوار ابوذر کوچه گیلانی کافه گل‌ها",
+//   instagram: "ccc.instagram",
+//   telegram: "ccc.telegram",
+//   bale: "0912245873",
+//   brand: "caffe",
+//   neshan: "https://nshn.ir/_bv_w2Oxpz2x",
+//   workTime: "0 5 10 19",
+//   gallery: [
+//     "/images/golha/one.jfif",
+//     "/images/golha/two.jfif",
+//     "/images/golha/tree.jfif",
+//   ],
+
+ const baseInstagramURL = "https://instagram.com";
+ const baseTelegramURL = "https://instagram.com";
+ const baseYoutubeURL = "https://youtube.com";
+
+
 export let customers = [
   {
     url: "golha",
@@ -22,17 +48,27 @@ export let customers = [
     ],
   },
   {
-    url: "perfect_code",
-    name: "perfect code",
-    plan: 1,
-    gender: "mail",
-    cardName: "مهدی دومانلو",
-    cardNom: "6219861989738504",
-    cardSheba: "154684356546848613588354",
-    instagram: "ccc.instagram",
-    telegram: "ccc.telegram",
-    bale: "ccc.bale",
-    brand: "taxi calling",
+    url: "mmdinfinity",
+    name: "mmdinfinity",
+    plan: 2,
+    gender: "male",
+    cardName: "محمد نظم‌ده",
+    cardNom: "6037997541005550",
+    // cardSheba: "457812400000002295917910",
+    // phoneNumber: "0912245873",
+    // address: "تهران - بلوار ابوذر کوچه گیلانی کافه گل‌ها",
+    instagram: `${baseInstagramURL}/@mmdinfinity`,
+    telegram: `${baseTelegramURL}/@pes_infinity`,
+    youtube: "/@Mmdinfinity?si=rf1cK2CVFVWepj0w",
+    bale: "0912245873",
+    brand: "caffe",
+    neshan: "https://nshn.ir/_bv_w2Oxpz2x",
+    workTime: "0 5 10 19",
+    gallery: [
+      "/images/golha/one.jfif",
+      "/images/golha/two.jfif",
+      "/images/golha/tree.jfif",
+    ],
   },
   {
     url: "tahora_salon",

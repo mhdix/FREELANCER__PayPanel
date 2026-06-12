@@ -64,7 +64,7 @@ function Customer() {
     phoneNumber,
     brand,
   } = findCustomer;
-  console.log(phoneNumber)
+  console.log(phoneNumber);
   const copyHandler = async (value) => {
     console.log(findCustomer);
     switch (value) {
@@ -151,8 +151,9 @@ function Customer() {
 
           {/* Buttons */}
           <div className="grid grid-cols-2 gap-3 mt-5">
-            <button
-              className={`
+            {findCustomer.cardNom && (
+              <button
+                className={`
               h-11 rounded-xl font-medium transition-all duration-300
               ${
                 copied.cardNom
@@ -160,13 +161,14 @@ function Customer() {
                   : "bg-slate-200 hover:bg-slate-300"
               }
             `}
-              onClick={() => copyHandler("cardNom")}
-            >
-              {copied.cardNom ? "✓ کپی شد" : "شماره کارت"}
-            </button>
-
-            <button
-              className={`
+                onClick={() => copyHandler("cardNom")}
+              >
+                {copied.cardNom ? "✓ کپی شد" : "شماره کارت"}
+              </button>
+            )}
+            {findCustomer.cardSheba && (
+              <button
+                className={`
               h-11 rounded-xl font-medium transition-all duration-300
               ${
                 copied.cardSheba
@@ -174,15 +176,20 @@ function Customer() {
                   : "bg-slate-200 hover:bg-slate-300"
               }
             `}
-              onClick={() => copyHandler("cardSheba")}
-            >
-              {copied.cardSheba ? "✓ کپی شد" : "شبا"}
-            </button>
+                onClick={() => copyHandler("cardSheba")}
+              >
+                {copied.cardSheba ? "✓ کپی شد" : "شبا"}
+              </button>
+            )}
 
-            <a href="" className="col-span-2 text-center text-xs">برای رزرو وقت روی دکمه تماس با ما کلیک کنید</a>
-            
-            <a
-              className={`
+            {findCustomer.phoneNumber && (
+              <>
+                <a href="" className="col-span-2 text-center text-xs">
+                  برای رزرو وقت روی دکمه تماس با ما کلیک کنید
+                </a>
+
+                <a
+                  className={`
               h-11 col-span-full rounded-xl font-medium transition-all duration-300 flex justify-center items-center
               ${
                 copied.phoneNumber
@@ -190,15 +197,18 @@ function Customer() {
                   : "bg-slate-900 text-white hover:bg-slate-700"
               }
             `}
-              onClick={() => copyHandler("phoneNumber")}
-              href={`tel:${phoneNumber}`}
-            >
-              {copied.phoneNumber ? "✓ کپی شد" : "تماس با ما"}
-            </a>
+                  onClick={() => copyHandler("phoneNumber")}
+                  href={`tel:${phoneNumber}`}
+                >
+                  {copied.phoneNumber ? "✓ کپی شد" : "تماس با ما"}
+                </a>
+              </>
+            )}
           </div>
         </div>
-        <p className="px-4 text-center">آدرس : {findCustomer.address}</p>
-
+        {findCustomer.address && (
+          <p className="px-4 text-center">آدرس : {findCustomer.address}</p>
+        )}
         {/* Links Section */}
         {findCustomer.plan === 2 && (
           <div className="p-4 grid grid-cols-2 gap-3">
@@ -281,15 +291,17 @@ function Customer() {
         )}
       </div>
 
-      <footer className="text-center left-0 bottom-0 w-full border-t border-[#9c9c9c] py-4">
-        شنبه تا پنج شنبه{" "}
-        <span
-          dir="ltr"
-          className="flex flex-col items-center justify-between gap-3 bg-[#f8fafc] border border-[#e5e7eb] rounded-[14px] p-2 px-6"
-        >
-          10 - 19:30
-        </span>
-      </footer>
+      {findCustomer.workTime && (
+        <footer className="text-center left-0 bottom-0 w-full border-t border-[#9c9c9c] py-4">
+          شنبه تا پنج شنبه{" "}
+          <span
+            dir="ltr"
+            className="flex flex-col items-center justify-between gap-3 bg-[#f8fafc] border border-[#e5e7eb] rounded-[14px] p-2 px-6"
+          >
+            10 - 19:30
+          </span>
+        </footer>
+      )}
     </div>
   );
 }
