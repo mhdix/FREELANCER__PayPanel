@@ -7,14 +7,14 @@ export let customers = [
     cardName: "محمدنظری",
     cardNom: "6104648568343256",
     cardSheba: "457812400000002295917910",
-    phoneNumber: "09154232813",
+    phoneNumber: "0912245873",
     address: "تهران - بلوار ابوذر کوچه گیلانی کافه گل‌ها",
     instagram: "ccc.instagram",
     // telegram: "ccc.telegram",
     bale: "0912245873",
     brand: "caffe",
     neshan: "https://nshn.ir/_bv_w2Oxpz2x",
-    workTime: "0 5 10 19"
+    workTime: "0 5 10 19",
   },
   {
     url: "perfect_code",

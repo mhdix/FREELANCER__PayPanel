@@ -15,7 +15,6 @@ function Customer() {
     cardNom: false,
     cardSheba: false,
     // social
-    phoneNumber: false,
     telegram: false,
     instagram: false,
     bale: false,
@@ -31,7 +30,6 @@ function Customer() {
     setCopied({
       cardNom: false,
       cardSheba: false,
-      phoneNumber: false,
       telegram: false,
       instagram: false,
       bale: false,
@@ -66,6 +64,7 @@ function Customer() {
     phoneNumber,
     brand,
   } = findCustomer;
+  console.log(phoneNumber)
   const copyHandler = async (value) => {
     console.log(findCustomer);
     switch (value) {
@@ -101,8 +100,8 @@ function Customer() {
   console.log(findCustomer);
 
   return (
-    <div className="h-full flex items-center justify-center p-4 text-right">
-      <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden">
+    <div className="h-full flex flex-col items-center relative justify-center p-4 text-right">
+      <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden mb-7">
         {/* Header */}
         <div className="bg-linear-to-r from-slate-900 to-slate-700 text-white p-2.5 px-6">
           <h2 className="text-2xl font-bold tracking-tight">{name}</h2>
@@ -142,7 +141,7 @@ function Customer() {
                 <p className="text-xs text-gray-500 mt-4 mb-1">شماره موبایل</p>
                 <a
                   href={`tel:${phoneNumber}`}
-                  className="font-mono tracking-widest text-lg"
+                  className="font-mono tracking-widest text-md"
                 >
                   {phoneNumber}
                 </a>
@@ -179,6 +178,9 @@ function Customer() {
             >
               {copied.cardSheba ? "✓ کپی شد" : "شبا"}
             </button>
+
+            <a href="" className="col-span-2 text-center text-xs">برای رزرو وقت روی دکمه تماس با ما کلیک کنید</a>
+            
             <a
               className={`
               h-11 col-span-full rounded-xl font-medium transition-all duration-300 flex justify-center items-center
@@ -191,7 +193,7 @@ function Customer() {
               onClick={() => copyHandler("phoneNumber")}
               href={`tel:${phoneNumber}`}
             >
-              {copied.phoneNumber ? "✓ کپی شد" : "شماره موبایل"}
+              {copied.phoneNumber ? "✓ کپی شد" : "تماس با ما"}
             </a>
           </div>
         </div>
@@ -278,6 +280,16 @@ function Customer() {
           </div>
         )}
       </div>
+
+      <footer className="text-center left-0 bottom-0 w-full border-t border-[#9c9c9c] py-4">
+        شنبه تا پنج شنبه{" "}
+        <span
+          dir="ltr"
+          className="flex flex-col items-center justify-between gap-3 bg-[#f8fafc] border border-[#e5e7eb] rounded-[14px] p-2 px-6"
+        >
+          10 - 19:30
+        </span>
+      </footer>
     </div>
   );
 }
