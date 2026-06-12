@@ -15,6 +15,11 @@ export let customers = [
     brand: "caffe",
     neshan: "https://nshn.ir/_bv_w2Oxpz2x",
     workTime: "0 5 10 19",
+    gallery: [
+      "/images/golha/one.jfif",
+      "/images/golha/two.jfif",
+      "/images/golha/tree.jfif",
+    ],
   },
   {
     url: "perfect_code",

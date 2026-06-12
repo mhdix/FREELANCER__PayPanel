@@ -57,15 +57,18 @@ const Gallery = () => {
         </div>
       </div>
       <div className="grid grid-cols-2 gap-3">
-        <div
-          className="overflow-hidden rounded-2xl border border-slate-200"
-        >
-          <img
-            src='/images/gallery.png'
-            alt=""
-            className="w-full aspect-square object-cover hover:scale-105 transition duration-300"
-          />
-        </div>
+        {(customer.gallery || []).map((item, index) => (
+          <div
+            key={index}
+            className="overflow-hidden rounded-2xl border border-slate-200"
+          >
+            <img
+              src={item}
+              alt=""
+              className="w-full aspect-square object-cover hover:scale-105 transition duration-300"
+            />
+          </div>
+        ))}
       </div>
     </>
   );
