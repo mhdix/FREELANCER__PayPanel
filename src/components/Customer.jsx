@@ -6,6 +6,7 @@ import {
   LiaMapPinSolid,
   LiaSocksSolid,
   LiaTelegramPlane,
+  LiaYoutube,
 } from "react-icons/lia";
 import { IoMdImages } from "react-icons/io";
 
@@ -19,6 +20,7 @@ function Customer() {
     instagram: false,
     bale: false,
     phoneNumber: false,
+    location: false,
   });
   const { url } = useParams();
 
@@ -213,18 +215,21 @@ function Customer() {
         {findCustomer.plan === 2 && (
           <div className="p-4 grid grid-cols-2 gap-3">
             {/* Gallery */}
-            <Link
-              to="gallery"
-              className="flex items-center justify-center gap-2 h-10 rounded-2xl border border-gray-200 hover:shadow-md hover:-translate-y-0.5 transition"
-            >
-              <span className="text-sm">گالری</span>
-              <IoMdImages size={22} />
-            </Link>
+            {findCustomer.gallery && (
+              <Link
+                to="gallery"
+                className="flex items-center justify-center gap-2 h-10 rounded-2xl border border-gray-200 hover:shadow-md hover:-translate-y-0.5 transition"
+              >
+                <span className="text-sm">گالری</span>
+                <IoMdImages size={22} />
+              </Link>
+            )}
 
             {/* Bale */}
-            <button
-              onClick={() => copyHandler("bale")}
-              className={`
+            {findCustomer.bale && (
+              <button
+                onClick={() => copyHandler("bale")}
+                className={`
             flex items-center justify-center gap-2 h-10 rounded-2xl border transition
             ${
               copied.bale
@@ -232,14 +237,17 @@ function Customer() {
                 : "border-gray-200 hover:shadow-md hover:-translate-y-0.5"
             }
           `}
-            >
-              <span className="text-sm">بله</span>
-              <img src="/icons/bale.png" className="w-5" />
-            </button>
+              >
+                <span className="text-sm">بله</span>
+                <img src="/icons/bale.png" className="w-5" />
+              </button>
+            )}
 
             {/* Telegram */}
             {findCustomer.telegram && (
-              <button
+              <a
+                href={findCustomer.telegram}
+                target="_blank"
                 onClick={() => copyHandler("telegram")}
                 className={`
             flex items-center justify-center gap-2 h-10 rounded-2xl border transition
@@ -252,12 +260,14 @@ function Customer() {
               >
                 <span className="text-sm">تلگرام</span>
                 <LiaTelegramPlane size={22} />
-              </button>
+              </a>
             )}
             {/* Insgram */}
             {findCustomer.instagram && (
-              <button
+              <a
                 onClick={() => copyHandler("instagram")}
+                href={findCustomer.instagram}
+                target="_blank"
                 className={`
               flex items-center justify-center gap-2 h-10 rounded-2xl border transition
               ${
@@ -269,24 +279,45 @@ function Customer() {
               >
                 <span className="text-sm">اینستاگرام</span>
                 <LiaInstagram size={22} />
-              </button>
+              </a>
             )}
 
-            <a
-              target="_blank"
-              href={findCustomer.neshan}
-              className={`
+            {findCustomer.location && (
+              <a
+                target="_blank"
+                href={findCustomer.location}
+                className={`
               flex items-center justify-center gap-2 h-10 rounded-2xl border transition
               ${
-                copied.instagram
+                copied.location
                   ? "bg-green-50 border-green-500 text-green-700"
                   : "border-gray-200 hover:shadow-md hover:-translate-y-0.5"
               }
                 `}
-            >
-              <span className="text-sm">لوکیشن</span>
-              <LiaMapPinSolid size={22} />
-            </a>
+              >
+                <span className="text-sm">لوکیشن</span>
+                <LiaMapPinSolid size={22} />
+              </a>
+            )}
+
+            {findCustomer.youtube && (
+              <a
+                target="_blank"
+                href={findCustomer.youtube}
+                className={`
+              flex items-center justify-center gap-2 h-10 rounded-2xl border transition
+              ${
+                copied.location
+                  ? "bg-green-50 border-green-500 text-green-700"
+                  : "border-gray-200 hover:shadow-md hover:-translate-y-0.5"
+              }
+                `}
+              >
+                <span className="text-sm">یوتیوب</span>
+                <LiaYoutube size={22} />
+              </a>
+            )}
+
           </div>
         )}
       </div>
