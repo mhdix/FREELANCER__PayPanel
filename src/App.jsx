@@ -17,11 +17,8 @@ function App() {
 
         <Route path="/:url/gallery" element={<Gallery />} />
       </Routes>
-
-      
     </div>
   );
 }
 
 export default App;
-            

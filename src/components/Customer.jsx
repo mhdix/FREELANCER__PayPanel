@@ -317,22 +317,34 @@ function Customer() {
                 <LiaYoutube size={22} />
               </a>
             )}
-
           </div>
         )}
       </div>
 
-      {findCustomer.workTime && (
-        <footer className="text-center left-0 bottom-0 w-full border-t border-[#9c9c9c] py-4">
-          شنبه تا پنج شنبه{" "}
-          <span
-            dir="ltr"
-            className="flex flex-col items-center justify-between gap-3 bg-[#f8fafc] border border-[#e5e7eb] rounded-[14px] p-2 px-6"
-          >
-            10 - 19:30
-          </span>
-        </footer>
-      )}
+      {findCustomer.workTime ||
+        (findCustomer.info && (
+          <footer className="text-center left-0 bottom-0 w-full border-t border-[#9c9c9c] py-4">
+            {findCustomer.workTime && (
+              <div>
+                شنبه تا پنج شنبه{" "}
+                <span
+                  dir="ltr"
+                  className="flex flex-col items-center justify-between gap-3 bg-[#f8fafc] border border-[#e5e7eb] rounded-[14px] p-2 px-6"
+                >
+                  10 - 19:30
+                </span>
+              </div>
+            )}
+            {findCustomer.info && (
+              <span
+                dir="ltr"
+                className="flex flex-col items-center justify-between gap-3 bg-[#f8fafc] border border-[#e5e7eb] rounded-[14px] p-2 px-6"
+              >
+               {findCustomer.info}
+              </span>
+            )}
+          </footer>
+        ))}
     </div>
   );
 }

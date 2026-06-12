@@ -20,7 +20,7 @@
 //   ],
 
  const baseInstagramURL = "https://instagram.com";
- const baseTelegramURL = "https://instagram.com";
+ const baseTelegramURL = "https://t.me";
  const baseYoutubeURL = "https://youtube.com";
 
 
@@ -62,6 +62,7 @@ export let customers = [
     youtube: `${baseYoutubeURL}/@Mmdinfinity?si=rf1cK2CVFVWepj0w`,
     // bale: "0912245873",
     brand: "caffe",
+    info: "فعال حوضه‌ی فوتبال",
     // location: "https://nshn.ir/_bv_w2Oxpz2x",
     // workTime: "0 5 10 19",
     // gallery: [
