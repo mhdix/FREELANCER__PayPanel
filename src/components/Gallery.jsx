@@ -25,32 +25,46 @@ const Gallery = () => {
   return (
     <>
       {/* Brand Section */}
-      <div className="relative flex">
-        <div className="border border-gray-200 p-1.5 mb- rounded-lg h-20 w-20 flex justify-center items-center shadow-md">
-          {/* <img src={logo} alt="brand" /> */}
-          Golha
-        </div>
-      </div>
-
-      {/* Gallery Card */}
-      <div className="card">
-        <div className="flex items-center justify-between border-b border-gray-400 mb-3">
+      <div className="sticky top-0 mt-4 mb-2 z-50 bg-white border-b border-slate-200">
+        <div className="h-16 px-4 flex items-center justify-between">
           <button onClick={() => navigate(-1)}>
             <IoIosArrowRoundBack size={30} />
           </button>
-          10
-        </div>
 
-        <div className="grid grid-cols-2 gap-2">
-          <div className="w-full h-fit">
-            <img src={image} alt="" />
+          <img src={logo} alt="NIPcard" className="h-8 object-contain" />
+        </div>
+      </div>
+
+      <div className="bg-white rounded-3xl shadow-md p-5 mb-4">
+        <p className="font-bold text-right">
+          {customer.gallery?.length || 0} تصویر
+        </p>
+        <div className="flex items-center gap-4">
+          <div className="w-20 h-20 rounded-2xl overflow-hidden border">
+            {isImage ? (
+              <img src={brand} alt="" className="w-full h-full object-cover" />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center text-xs">
+                {brand}
+              </div>
+            )}
           </div>
-          <div className="w-full h-fit">
-            <img src={image} alt="" />
+
+          <div>
+            <h1 className="font-bold text-xl">{customer.name}</h1>
+            <p className="text-sm text-slate-500">{customer.address}</p>
           </div>
-          <div className="w-full h-fit">
-            <img src={image} alt="" />
-          </div>
+        </div>
+      </div>
+      <div className="grid grid-cols-2 gap-3">
+        <div
+          className="overflow-hidden rounded-2xl border border-slate-200"
+        >
+          <img
+            src='/images/gallery.png'
+            alt=""
+            className="w-full aspect-square object-cover hover:scale-105 transition duration-300"
+          />
         </div>
       </div>
     </>
