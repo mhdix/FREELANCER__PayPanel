@@ -7,7 +7,7 @@ import Navbar from "./components/Navbar";
 
 function App() {
   return (
-    <div className="w-full flex flex-col items-center space-y-14 min-h-screen relative">
+    <div className="w-full flex flex-col items-center space- min-h-screen relative">
       <Navbar />
       <Routes>
         <Route path="/admin" element={<AddCustomer />} />
@@ -23,7 +23,6 @@ function App() {
             href="tel:09925438078"
             className="flex flex-col items-center justify-between gap-3 bg-[#f8fafc] border border-[#e5e7eb] rounded-[14px] p-2 px-6"
           >
-            09925438078
           </a>
           <p>رزرو نیپ‌کارت</p>
         </div>

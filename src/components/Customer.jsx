@@ -24,7 +24,6 @@ function Customer() {
   const { url } = useParams();
 
   const findCustomer = customers.find((customer) => customer.url === url);
-  const index = findCustomer.length;
 
   console.log(findCustomer);
 
@@ -232,11 +231,6 @@ function Customer() {
                 onClick={() => copyHandler("telegram")}
                 className={`
             flex items-center justify-center gap-2 h-10 rounded-2xl border transition
-             ${
-               index === items.length - 1 && items.length % 2 !== 0
-                 ? "col-span-2"
-                 : ""
-             }
             ${
               copied.telegram
                 ? "bg-green-50 border-green-500 text-green-700"
@@ -254,11 +248,6 @@ function Customer() {
                 onClick={() => copyHandler("instagram")}
                 className={`
               flex items-center justify-center gap-2 h-10 rounded-2xl border transition
-               ${
-                 index === items.length - 1 && items.length % 2 !== 0
-                   ? "col-span-2"
-                   : ""
-               }
               ${
                 copied.instagram
                   ? "bg-green-50 border-green-500 text-green-700"
@@ -271,16 +260,11 @@ function Customer() {
               </button>
             )}
 
-            <button
-              onClick={() => copyHandler("instagram")}
+            <a
+              target="_blank"
+              href={findCustomer.neshan}
               className={`
-              flex items-center justify-center gap-2 h-10 rounded-2xl border transition 
-              ${
-                index === findCustomer.length - 1 &&
-                findCustomer.length % 2 !== 0
-                  ? "col-span-2"
-                  : ""
-              }
+              flex items-center justify-center gap-2 h-10 rounded-2xl border transition
               ${
                 copied.instagram
                   ? "bg-green-50 border-green-500 text-green-700"
@@ -290,7 +274,7 @@ function Customer() {
             >
               <span className="text-sm">لوکیشن</span>
               <LiaMapPinSolid size={22} />
-            </button>
+            </a>
           </div>
         )}
       </div>
