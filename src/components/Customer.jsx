@@ -65,6 +65,8 @@ function Customer() {
     name,
     phoneNumber,
     brand,
+    telePhone1,
+    telePhone2,
   } = findCustomer;
   console.log(phoneNumber);
   const copyHandler = async (value) => {
@@ -126,7 +128,6 @@ function Customer() {
             >
               {cardNom.match(/.{1,4}/g).join(" ")}
             </p>
-
             {cardSheba && (
               <>
                 <p className="text-xs text-gray-500 mt-4 mb-1">شماره شبا</p>
@@ -138,7 +139,7 @@ function Customer() {
                 </p>
               </>
             )}
-            {cardSheba && (
+            {phoneNumber && (
               <>
                 <p className="text-xs text-gray-500 mt-4 mb-1">شماره موبایل</p>
                 <a
@@ -147,6 +148,27 @@ function Customer() {
                 >
                   {phoneNumber}
                 </a>
+              </>
+            )}{" "}
+            {telePhone1 && (
+              <>
+                <p className="text-xs text-gray-500 mt-4 mb-1">تلفن ثابت</p>
+                <div className="flex flex-col">
+                  <a
+                    href={`tel:${telePhone1}`}
+                    className="font-mono tracking-widest text-md"
+                  >
+                    {telePhone1}
+                  </a>
+                  {telePhone2 && (
+                    <a
+                      href={`tel:${telePhone2}`}
+                      className="font-mono tracking-widest text-md"
+                    >
+                      {telePhone2}
+                    </a>
+                  )}
+                </div>
               </>
             )}
           </div>
@@ -340,7 +362,7 @@ function Customer() {
                 dir="ltr"
                 className="flex flex-col items-center justify-between gap-3 bg-[#f8fafc] border border-[#e5e7eb] rounded-[14px] p-2 px-6"
               >
-               {findCustomer.info}
+                {findCustomer.info}
               </span>
             )}
           </footer>
